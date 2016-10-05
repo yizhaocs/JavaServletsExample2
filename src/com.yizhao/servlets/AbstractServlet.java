@@ -8,10 +8,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * curl http://localhost:8080/ps/ps
+ * curl http://localhost:8080/example1
  */
 public abstract class AbstractServlet implements HttpRequestHandler {
-    //private static final Logger log = Logger.getLogger(AbstractServlet.class);
+
+    public void init() throws ServletException {
+    }
+
+    public void destroy() throws ServletException {
+    }
 
     public final void handleRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -26,6 +31,5 @@ public abstract class AbstractServlet implements HttpRequestHandler {
     protected abstract void handleRequestInner(HttpServletRequest request,
                                                HttpServletResponse response) throws Exception;
 
-    public void init() throws ServletException {
-    }
+
 }

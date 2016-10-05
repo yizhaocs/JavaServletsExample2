@@ -8,7 +8,11 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
 
-    <bean id="example1Servlet" class="com.yizhao.servlets.Example1Servlet" init-method="init">
+    <bean id="example1Servlet" class="com.yizhao.servlets.Example1Servlet" init-method="init" destroy-method="destroy">
+
+    </bean>
+
+    <bean id="example2Servlet" class="com.yizhao.servlets.Example2Servlet" init-method="init" destroy-method="destroy">
 
     </bean>
 </beans>

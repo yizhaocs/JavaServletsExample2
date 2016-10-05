@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE web-app
-        PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-        "http://java.sun.com/dtd/web-app_2_3.dtd">
 
-<web-app>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
   <display-name>Archetype Created Web Application</display-name>
 
   <!-- Spring config files: order is important dependent beans should be first -->
@@ -18,9 +17,6 @@
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
- <!--<listener>-->
-    <!--<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
-  <!--</listener>-->
 
   <servlet>
     <servlet-name>example1Servlet</servlet-name>
@@ -29,6 +25,17 @@
 
   <servlet-mapping>
     <servlet-name> example1Servlet	</servlet-name>
-    <url-pattern> /ps/ps </url-pattern>
+    <url-pattern> /example1 </url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>example2Servlet</servlet-name>
+    <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name> example2Servlet	</servlet-name>
+    <url-pattern> /example2 </url-pattern>
+  </servlet-mapping>
+
 </web-app>

@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Created by yzhao on 10/5/16.
+ * curl http://localhost:8080/example1
  */
 public class Example1Servlet extends  AbstractServlet {
     @Override
@@ -17,5 +17,10 @@ public class Example1Servlet extends  AbstractServlet {
     @Override
     public void init() throws ServletException {
         super.init();
+    }
+
+    @Override
+    public void destroy() throws ServletException {
+        super.destroy();
     }
 }
