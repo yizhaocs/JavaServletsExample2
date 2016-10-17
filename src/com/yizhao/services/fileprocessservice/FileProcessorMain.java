@@ -6,10 +6,10 @@ import java.util.concurrent.Executors;
 /**
  * Created by yzhao on 10/17/16.
  */
-public class FileProcessor {
+public class FileProcessorMain {
     private ExecutorService validatorThreadPool = null;
 
-    public FileProcessor(){
+    public FileProcessorMain(){
 
         BasicThreadFactory factory = new BasicThreadFactory.Builder()
                 .namingPattern("validator-%d")

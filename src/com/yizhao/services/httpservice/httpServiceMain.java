@@ -10,7 +10,7 @@ import java.net.URLConnection;
 /**
  * Created by yzhao on 10/17/16.
  */
-public class httpService {
+public class HttpServiceMain {
     public static void main(String[] args) throws Exception{
         System.out.println(httpGet("http://www.google.com"));
     }
