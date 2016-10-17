@@ -16,7 +16,7 @@
 
     </bean>
 
-    <bean id="pixelDataService" class="com.yizhao.services.dataservice.RefreshDataServiceMain" init-method="init" destroy-method="destroy">
+    <bean id="pixelDataService" class="com.yizhao.services.refreshdataservice.RefreshDataServiceMain" init-method="init" destroy-method="destroy">
         <property name="datasource" ref="myDataSource" />
         <property name="refreshInterval" value="60" /> <!-- seconds -->
     </bean>

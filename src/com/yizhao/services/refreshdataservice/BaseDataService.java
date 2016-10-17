@@ -1,4 +1,4 @@
-package com.yizhao.services.dataservice;
+package com.yizhao.services.refreshdataservice;
 
 import org.apache.log4j.Logger;
 
@@ -14,7 +14,6 @@ public class BaseDataService extends MySQLDaoBase{
     protected void refresh(){
 
     }
-
 
 }
 

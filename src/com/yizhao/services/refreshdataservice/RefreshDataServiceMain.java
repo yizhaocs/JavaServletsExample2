@@ -1,4 +1,4 @@
-package com.yizhao.services.dataservice;
+package com.yizhao.services.refreshdataservice;
 
 import org.apache.log4j.Logger;
 
@@ -12,11 +12,11 @@ import java.util.concurrent.TimeUnit;
  */
 public class RefreshDataServiceMain extends BaseDataService {
 
-    static Logger log = Logger.getLogger("PixelDataService.class");
+    static Logger log = Logger.getLogger("RefreshDataServiceMain.class");
 
     private int refreshInterval = 60; // seconds
 
-    private Map<Integer, DataProvider> dataProviders = new HashMap<Integer, DataProvider>();
+    private Map<Integer, RefreshExampleDTO> dataProviders = new HashMap<Integer, RefreshExampleDTO>();
 
 
     private Date lastRefresh;
@@ -31,7 +31,7 @@ public class RefreshDataServiceMain extends BaseDataService {
 
         super.refresh();
         lastRefresh = new Date();
-        log.info("PixelDataService.refresh et:"	+ (System.currentTimeMillis() - start));
+        log.info("RefreshDataServiceMain.refresh et:"	+ (System.currentTimeMillis() - start));
     }
 
     public void init() {
@@ -39,11 +39,11 @@ public class RefreshDataServiceMain extends BaseDataService {
         // start background refresh thread
         refreshThread.scheduleWithFixedDelay(new Runnable() {
             public void run() {
-                Thread.currentThread().setName("PixelDataService");
+                Thread.currentThread().setName("RefreshDataServiceMain");
                 try {
                     refresh();
                 } catch (Exception e) {
-                    log.error("PixelDataService.refresh:", e);
+                    log.error("RefreshDataServiceMain.refresh:", e);
                 }
 
             }
@@ -77,39 +77,33 @@ public class RefreshDataServiceMain extends BaseDataService {
 
         try {
 
-            HashMap<Integer, DataProvider> tmpDataProviders = new HashMap<Integer, DataProvider>();
+            HashMap<Integer, RefreshExampleDTO> tmpDataProviders = new HashMap<Integer, RefreshExampleDTO>();
 
-            List<DataProvider> retval = new ArrayList<DataProvider>();
-            String DATA_PROVIDERS_SQL = "select id, name, do_pixel, ifnull(has_offline_data, 0) as has_offline_data, sync_facebook from data_providers";
+            List<RefreshExampleDTO> retval = new ArrayList<RefreshExampleDTO>();
+            String DATA_PROVIDERS_SQL = "select id, name from refresh_example";
             List<Map<String, Object>> rows = this
                     .getResults(DATA_PROVIDERS_SQL);
 
 
             for (Map<String, Object> row : rows) {
-                DataProvider dp = new DataProvider();
+                RefreshExampleDTO dp = new RefreshExampleDTO();
                 dp.setId((Integer) row.get("id"));
                 dp.setName((String) row.get("name"));
-                dp.setDoPixel(((Integer) row.get("do_pixel")).byteValue());
-                dp.setHasOfflineData(((Long) row.get("has_offline_data")) == 0 ? false	: true);
-                dp.setSyncFacebook((Boolean) row.get("sync_facebook"));
                 retval.add(dp);
             }
 
-            for (DataProvider dp : retval) {
-                if (dp.getDoPixel() == DataProvider.DoPixel.ENABLED) {
-                    tmpDataProviders.put(dp.getId(), dp);
-                } else {
-                    log.info(String.format("dataProvider %s is disabled",dp.getId()));
-                }
+            for (RefreshExampleDTO dp : retval) {
+                tmpDataProviders.put(dp.getId(), dp);
             }
-            log.debug("Valid data providers: " + tmpDataProviders.keySet());
+
+            log.debug("Valid rows: " + tmpDataProviders.keySet());
             this.dataProviders = tmpDataProviders;
         } catch (Exception e) {
-            log.error("Unable to refresh Data Providers", e);
+            log.error("Unable to refresh table", e);
         }
     }
 
-    public Map<Integer, DataProvider> getDataProviders(){
+    public Map<Integer, RefreshExampleDTO> getDataProviders(){
         return dataProviders;
     }
 
