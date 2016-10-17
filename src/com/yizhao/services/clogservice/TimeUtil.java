@@ -10,9 +10,7 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 
-/**
- * @author hmei
- */
+
 public class TimeUtil {
     private static final Logger log = Logger.getLogger(TimeUtil.class);
 

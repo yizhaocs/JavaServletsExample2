@@ -8,17 +8,22 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
 
-    <bean id="example1Servlet" class="com.yizhao.servlets.Example1Servlet" init-method="init" destroy-method="destroy">
+
+    <!-- DataSources & SessionFactories -->
+    <bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          parent="parentDataSource" destroy-method="close">
+        <property name="url" value="jdbc:mysql://localhost/marketplace?connectTimeout=20000"/>
 
     </bean>
 
-    <bean id="example2Servlet" class="com.yizhao.servlets.Example2Servlet" init-method="init" destroy-method="destroy">
-
-    </bean>
-
-    <bean id="pixelDataService" class="com.yizhao.services.dataservice.RefreshDataService" init-method="init" destroy-method="destroy">
-        <property name="datasource" ref="myDataSource" />
-        <property name="refreshInterval" value="60" /> <!-- seconds -->
+    <bean id="parentDataSource" abstract="true">
+    <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+    <property name="username" value="om"/>
+    <property name="password" value="N3wQA3ra."/>
+    <property name="testOnBorrow" value="true"/>
+    <property name="validationQuery" value="SELECT 1"/>
+    <property name="maxActive" value="3"/>
+    <property name="minIdle" value="1"/>
     </bean>
 
 </beans>

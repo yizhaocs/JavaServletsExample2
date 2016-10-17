@@ -8,9 +8,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 
-/**
- * @author hmei
- */
+
 public class EqualsUtil {
 
     /**

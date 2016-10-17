@@ -2,9 +2,7 @@ package com.yizhao.services.clogservice;
 
 import java.util.*;
 
-/**
- * @author hmei
- */
+
 public class CollectionUtil {
     public static boolean empty( Object[] arr ){
         return arr == null || arr.length == 0;
