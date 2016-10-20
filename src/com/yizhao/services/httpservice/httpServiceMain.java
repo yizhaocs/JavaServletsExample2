@@ -11,18 +11,48 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 
 /**
- * Created by yzhao on 10/17/16.
+ * https://www.mkyong.com/java/how-to-send-http-request-getpost-in-java/
  */
 public class HttpServiceMain {
 
     private static final String USER_AGENT = "Mozilla/5.0";
 
     public static void main(String[] args) throws Exception {
-        System.out.println(httpPost("http://echo.itcuties.com", "hi there!"));
+//        System.out.println(httpPost("http://echo.itcuties.com", "hi there!"));
         //System.out.println(httpGet("http://www.google.com"));
+
+        System.out.println(sendGet("http://www.google.com/search?q=mkyong"));
+    }
+    // HTTP GET request
+    private static String sendGet(String url) throws Exception {
+        URL obj = new URL(url);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+        // optional default is GET
+        con.setRequestMethod("GET");
+
+        //add request header
+        con.setRequestProperty("User-Agent", USER_AGENT);
+
+        int responseCode = con.getResponseCode();
+        System.out.println("\nSending 'GET' request to URL : " + url);
+        System.out.println("Response Code : " + responseCode);
+
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
+
+        return response.toString();
+
     }
 
-    public static String httpGet(String url) throws Exception {
+   /* public static String httpGet(String url) throws Exception {
         URLConnection connection = new URL(url).openConnection();
         connection.setRequestProperty("Accept-Charset", "UTF-8");
         connection.setDoOutput(true);
@@ -45,7 +75,7 @@ public class HttpServiceMain {
         }
 
         return sb.toString();
-    }
+    }*/
 
 
     /**
